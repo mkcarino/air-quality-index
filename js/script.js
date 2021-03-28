@@ -119,7 +119,7 @@ async function getData(lat, lng) {
   _showData(data);
   } catch(err){
     console.error(err);
-    console.log("errore");
+    console.log("Errore Richiesta api");
   }
 
 }
@@ -170,17 +170,17 @@ function _showData(data) {
 /* 
 Returns the class name based on aqi level this is used in css to render colors for every aqi level
 */
-function _aqiStatus(aqi, short) {
+function _aqiStatus(aqi) {
   if (aqi <= 50)
     return 'good';
   else if (aqi <= 100)
     return 'moderate';
   else if (aqi <= 150)
-    return short ? 'USG' : 'unhealthy-moderate';
+    return 'USG';
   else if (aqi <= 200)
     return 'unhealthy';
   else if (aqi <= 300)
-    return short ? 'VU' : 'very-unhealthy';
+    return 'VU';
   else
     return 'hazardous';
 }

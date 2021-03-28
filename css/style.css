@@ -227,7 +227,7 @@ hr{
     background-color: #972b48;
 }
 
-/* media querys */
+/* media queries */
 @media only screen and (max-width: 490px){
    
     .row, #main-info {
@@ -248,7 +248,13 @@ hr{
     }
     #searchInput{
         width: 340px;
-    } 
+    }
+    .animate__slideInDown {
+        -webkit-animation-name: slideInDownMobile;
+        animation-name: slideInDownMobile;
+      }
+    
+
 
 }
 @media only screen and (max-width: 768px){
@@ -285,10 +291,34 @@ hr{
       transform: translate3d(0, 0, 0);
     }
   }
-  @keyframes slideInDown {
+  @keyframes slideInDownMobile {
     from {
       -webkit-transform: translate3d(0, -50%, 0);
       transform: translate3d(0, -50%, 0);
+      visibility: hidden;
+    }
+  
+    to {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  @-webkit-keyframes slideInDownMobile {
+    from {
+      -webkit-transform: translate3d(0, -20%, 0);
+      transform: translate3d(0, -20%, 0);
+      visibility: hidden;
+    }
+  
+    to {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  @keyframes slideInDown {
+    from {
+      -webkit-transform: translate3d(0, -20%, 0);
+      transform: translate3d(0, -20%, 0);
       visibility: hidden;
     }
   
