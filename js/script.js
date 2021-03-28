@@ -1,6 +1,6 @@
 document.getElementById("info-card").hidden = true;
 
-//Google map implemantation
+//Google maps Implementation
 
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
@@ -57,7 +57,6 @@ function initMap() {
   // more details for that place.
   searchBox.addListener('places_changed', function () {
     var places = searchBox.getPlaces();
-
     if (places.length == 0) {
       return;
     }
@@ -114,12 +113,11 @@ async function getData(lat, lng) {
   const lng_query = lng;
   try{
   const api_url = `https://api.waqi.info/feed/geo:${lat_query};${lng_query}/?token=${keyAqi}`;
-  console.log(api_url);
   const response = await fetch(api_url);
   const data = await response.json();
+  //Call to showdata
   _showData(data);
   } catch(err){
-    
     console.error(err);
     console.log("errore");
   }
@@ -130,19 +128,13 @@ function _showData(data) {
   const attributions = document.getElementById('attributions');
   const listRow = document.getElementById('listRow');
   const healtMsg = document.getElementById('health-msg');
+
   listRow.innerHTML = '';
 
   data = data.data;
-  //const aqi = data.aqi;
-  //const station = data.city.name;
-  const {aqi} = data;
-  const {city :{name : station}} =data;
-
-  document.getElementById("info-card").style.display = "flex";
-  const mapup = document.getElementById('map');
-  mapup.classList.add("animate__slideOutUp");
-  document.getElementById('intro').hidden = true;
-
+  const aqi = data.aqi;
+  const station = data.city.name;
+  //AQI Data Creation
   indexNumb.classList = [];
   indexNumb.classList.add(_aqiStatus(aqi));
 
@@ -150,20 +142,19 @@ function _showData(data) {
 
   document.getElementById('indice').innerHTML = aqi;
   document.getElementById('citta').innerHTML = station;
-
+  document.getElementById("info-card").style.display = "flex";
 
   attributions.innerText = data.attributions[0].name;
   attributions.href = data.attributions[0].url;
-
+  //More Data Creation
   for (let iaqiType in data.iaqi) {
-    console.log(iaqiType)
     if (data.iaqi.hasOwnProperty(iaqiType) && _getTitle(iaqiType)) {
       const details = document.createElement('div');
       details.classList.add('details');
 
       const iaqiNumber = document.createElement('div');
       iaqiNumber.classList.add('iaqi', _aqiStatus(data.iaqi[iaqiType].v));
-      iaqiNumber.innerHTML = Math.round(data.iaqi[iaqiType].v * 10) / 10;
+      iaqiNumber.innerHTML = data.iaqi[iaqiType].v;
 
       const title = document.createElement('div');
       title.classList.add('main-title');
@@ -176,11 +167,9 @@ function _showData(data) {
 
   }
 }
-
-
-/* Returns the class name based on aqi level
-This is used in css to render different colors for every aqi level
-  */
+/* 
+Returns the class name based on aqi level this is used in css to render colors for every aqi level
+*/
 function _aqiStatus(aqi, short) {
   if (aqi <= 50)
     return 'good';
@@ -197,7 +186,6 @@ function _aqiStatus(aqi, short) {
 }
 
 /* Gets the title of the pollutant based on short name */
-
 function _getTitle(shortname) {
   if (shortname == 'co')
     return 'Carbon Monoxide';
@@ -216,7 +204,7 @@ function _getTitle(shortname) {
   else
     return null;
 }
-
+/* Gets the health advisory message based of the aqi level */
 function _getHealthMsg(aqi) {
   if (aqi <= 50)
     return 'No Risk, enjoy your day!';
