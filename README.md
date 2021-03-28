@@ -1,6 +1,6 @@
 # Air Quality Index (AQI)
-A single-page application that provides the air quality data on the user'S current location or any location in the world.
-The application provideS a clean interface and present you the air quality data in clear user friendly way and easy to undestand.
+A single-page application that provides the air quality data on the user's current location or any location in the world.
+The application provides a clean interface and present you the air quality data in clear user friendly way and easy to undestand.
 
 ## Technologies used:
 
