@@ -123,7 +123,13 @@ async function getData(lat, lng) {
   }
 
 }
+//Display data on the info-card div
 function _showData(data) {
+  //Using API data
+  data = data.data;
+  const aqi = data.aqi;
+  const station = data.city.name;
+
   const indexNumb = document.getElementById('aqi-number');
   const attributions = document.getElementById('attributions');
   const listRow = document.getElementById('listRow');
@@ -131,9 +137,6 @@ function _showData(data) {
 
   listRow.innerHTML = '';
 
-  data = data.data;
-  const aqi = data.aqi;
-  const station = data.city.name;
   //AQI Data Creation
   indexNumb.classList = [];
   indexNumb.classList.add(_aqiStatus(aqi));
@@ -167,9 +170,9 @@ function _showData(data) {
 
   }
 }
-/* 
-Returns the class name based on aqi level this is used in css to render colors for every aqi level
-*/
+
+//Returns the class name based on aqi level this is used in css to render colors for every aqi level
+
 function _aqiStatus(aqi) {
   if (aqi <= 50)
     return 'good';
@@ -185,7 +188,7 @@ function _aqiStatus(aqi) {
     return 'hazardous';
 }
 
-/* Gets the title of the pollutant based on short name */
+//Gets the title of the pollutant based on short name 
 function _getTitle(shortname) {
   if (shortname == 'co')
     return 'Carbon Monoxide';
@@ -204,7 +207,7 @@ function _getTitle(shortname) {
   else
     return null;
 }
-/* Gets the health advisory message based of the aqi level */
+//Gets the health advisory message based of the aqi level 
 function _getHealthMsg(aqi) {
   if (aqi <= 50)
     return 'No Risk, enjoy your day!';
