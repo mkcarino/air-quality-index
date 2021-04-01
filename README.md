@@ -12,3 +12,4 @@ Live preview here: [Air Quality Index](https://laughing-bell-37a584.netlify.app)
 * AnimateCss (for the animation)
 
 Project for Javascript-Advanced by start2Impact
+(the Google Api is restricted, and can be used only by the site above, you need to create your own API)
