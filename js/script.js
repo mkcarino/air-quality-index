@@ -1,6 +1,4 @@
-require('dotenv').config();
-const keyAqi = process.env.API_KEY;
-console.log(process.env.API_KEY);
+
 //Google maps Implementation
 document.getElementById("info-card").hidden = true;
 function initMap() {

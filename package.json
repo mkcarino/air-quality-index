@@ -1,8 +1,8 @@
 {
   "name": "air-quality-index",
   "version": "1.0.0",
-  "description": "A single-page user-friendly application that provides the air quality data of the user's current location or from any location in the world.",
-  "main": "./js/script.js",
+  "description": "Air quality-index",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,8 +15,5 @@
   "bugs": {
     "url": "https://github.com/mkcarino/air-quality-index/issues"
   },
-  "homepage": "https://github.com/mkcarino/air-quality-index#readme",
-  "dependencies": {
-    "dotenv": "^8.2.0"
-  }
+  "homepage": "https://github.com/mkcarino/air-quality-index#readme"
 }
