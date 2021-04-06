@@ -1,9 +1,8 @@
 require('dotenv').config();
-console.log(process.env);
-document.getElementById("info-card").hidden = true;
-
+const keyAqi = process.env.API_KEY;
+console.log(process.env.API_KEY);
 //Google maps Implementation
-
+document.getElementById("info-card").hidden = true;
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: 45.4642, lng: 9.1900 },
@@ -110,7 +109,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 //Api Call
 async function getData(lat, lng) {
-  const keyAqi = process.env.API_KEY;
+
   const lat_query = lat;
   const lng_query = lng;
   try{
