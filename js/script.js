@@ -1,3 +1,5 @@
+require('dotenv').config();
+console.log(process.env);
 document.getElementById("info-card").hidden = true;
 
 //Google maps Implementation
@@ -108,7 +110,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 //Api Call
 async function getData(lat, lng) {
-  const keyAqi = '592da9b92d49ca62fe6d5c42d5e325cf5ce9d116';
+  const keyAqi = process.env.API_KEY;
   const lat_query = lat;
   const lng_query = lng;
   try{
