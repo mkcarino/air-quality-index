@@ -1,7 +1,13 @@
+const axios = require('axios');
+//Use require('lodash') if you need other package
+var _get = require('lodash/get');
+
+document.getElementById("info-card").hidden = true;
 
 //Google maps Implementation
-document.getElementById("info-card").hidden = true;
+window.initMap = initMap;
 function initMap() {
+  
   var map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: 45.4642, lng: 9.1900 },
     zoom: 13,
@@ -30,6 +36,7 @@ function initMap() {
         infoWindow.setContent('You are here.');
         map.setCenter(pos);
         console.log(pos.lat, pos.lng);
+        
         getData(pos.lat, pos.lng);
       }, function () {
         handleLocationError(true, infoWindow, map.getCenter());
@@ -107,28 +114,38 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 //Api Call
 async function getData(lat, lng) {
-
+  // Use dotenv to hide your API KEY
+  const kenTo = process.env.API_KEY;
   const lat_query = lat;
   const lng_query = lng;
-  try{
-  const api_url = `https://api.waqi.info/feed/geo:${lat_query};${lng_query}/?token=${keyAqi}`;
-  const response = await fetch(api_url);
-  const data = await response.json();
-  //Call to showdata
-  _showData(data);
-  } catch(err){
-    console.error(err);
-    console.log("Errore Richiesta api");
-  }
+  const api_url = `https://api.waqi.info/feed/geo:${lat_query};${lng_query}/?token=${kenTo}`;
 
+  axios.get(api_url)
+    .then(function (response){
+      const data = response.data;
+      //Api request can return a status error
+      data.status == "ok" ? _showData(data) : errorApiHandler(data.data);  
+    })
+    .catch (function (error) {
+      errorApiHandler(error);
+    })
+  };
+//Error Handler in case of bad request   
+function errorApiHandler(error){ 
+  console.log(error);
+  document.getElementById("info-card").hidden= false;
+  document.getElementById("info-card").innerHTML= "";
+  document.getElementById("info-card").innerHTML= "Something went wrong, search another city or try again later";
 }
+
 //Display data on the info-card div
 function _showData(data) {
   //Using API data
   data = data.data;
-  const aqi = data.aqi;
-  const station = data.city.name;
-
+  const aqi = _get(data,'aqi', -1);
+  const station = _get(data,'city.name', 'Station information not available');
+  const stationLinkName = _get(data, 'attributions[0].name', 'Link not available');
+  const stationLink= _get(data, 'attributions[0].url', '#'); 
   const indexNumb = document.getElementById('aqi-number');
   const attributions = document.getElementById('attributions');
   const listRow = document.getElementById('listRow');
@@ -146,8 +163,8 @@ function _showData(data) {
   document.getElementById('citta').innerHTML = station;
   document.getElementById("info-card").style.display = "flex";
 
-  attributions.innerText = data.attributions[0].name;
-  attributions.href = data.attributions[0].url;
+  attributions.innerText = stationLinkName;
+  attributions.href = stationLink;
   //More Data Creation
   for (let iaqiType in data.iaqi) {
     if (data.iaqi.hasOwnProperty(iaqiType) && _getTitle(iaqiType)) {
@@ -173,7 +190,9 @@ function _showData(data) {
 //Returns the class name based on aqi level this is used in css to render colors for every aqi level
 
 function _aqiStatus(aqi) {
-  if (aqi <= 50)
+  if (aqi == -1)
+    return 'N/A';
+  else if (aqi <= 50)
     return 'good';
   else if (aqi <= 100)
     return 'moderate';
