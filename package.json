@@ -20,11 +20,16 @@
   "homepage": "https://github.com/mkcarino/air-quality-index#readme",
   "dependencies": {
     "axios": "^0.21.1",
+    "css-loader": "^5.2.0",
+    "html-webpack-plugin": "^5.3.1",
     "lodash": "^4.17.21",
-    "lodash-webpack-plugin": "^0.11.6"
+    "lodash-webpack-plugin": "^0.11.6",
+    "style-loader": "^2.0.0",
+    "url-loader": "^4.1.1"
   },
   "devDependencies": {
     "dotenv-webpack": "^7.0.2",
+    "mini-css-extract-plugin": "^1.4.1",
     "webpack": "^5.30.0",
     "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^3.11.2"

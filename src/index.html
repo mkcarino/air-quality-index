@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air Quality Index</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+</head>
+
+<body>
+    <div id="intro" ><h3>Air Quality Index</h3></div>
+    <div id='container'>
+        
+        <div id='seachBox'>
+            <input id="searchInput" class="controls" type="text" placeholder="Search for a location or press the location icon "> 
+        </div>
+        <button id="button"><i class="fas fa-crosshairs"></i></button>
+        <div id="map" class="animate__animated ">
+
+        </div>
+        <div id="info-card" class="animate__animated animate__slideInDown">
+            <div id="main-info">
+                <div id="aqi-number"><span id="indice"></span></div>
+                <div id="station-data">
+                    <p id="main-title">Air Quality Index (AQI)</p>
+                    <p id="sub-title">Data from: <span id="citta"></span><br> <a id="attributions" href="#"
+                            target="_blank" rel="noopener"></a></p>
+                    <p id="health-imp">Health Advisory:<br><span id="health-msg">No Risk, enjoy your day</span></p>
+                </div>
+            </div>
+            <hr>
+            <div id="more-data">More data:</div>
+            <div class="row" id="listRow">
+            <!-- Fill this div with JavaScript -->
+            </div>
+            <div id="footer">Learn more on how AQI works and the Health Advisory <a id="learn-more" href="https://www.airnow.gov/aqi/aqi-basics/" target="_blank">here. </a> </div>
+        </div>
+    </div>
+    <script src="./main.js"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAc35Qy8eaPK668t0I2J2_isXW0eK9SNNE&callback=initMap"
+        async defer></script>
+</body>
+
+</html>

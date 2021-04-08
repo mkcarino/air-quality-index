@@ -1,3 +1,6 @@
+// impor
+import "./style.css";
+
 const axios = require('axios');
 //Use require('lodash') if you need other package
 var _get = require('lodash/get');
