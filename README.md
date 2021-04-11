@@ -41,11 +41,11 @@ API_KEY={YOUR_KEY}
 npm run start
 ```
 
-2\. Open [localhost:8080](http://localhost:8080) to see the live app.
+2\. Open [localhost:8000](http://localhost:8000) to see the live app.
 
 ## What’s in the repo
 
-This repo includes the source code of _LitHub_. The app has the following structure:
+The app has the following structure:
 
 ```
 
